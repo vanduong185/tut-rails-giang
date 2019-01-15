@@ -1,24 +1,25 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* config mysql 
+gemfile:
+ gem 'mysql2', '~> 0.5.2'
 
-Things you may want to cover:
+ database.yml:
+ #mysql
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  username: non-root
+  password: 123
+  socket: /opt/lampp/var/mysql/mysql.sock
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+development:
+  <<: *default
+  database: atoy
+* create model 'rails db:migrate'
+rails generate model User name:string email:string
+* create controller
+rails generate controller Users new
+* them the csrf-token
+   <input type="hidden" name="authenticity_token" value={token} readOnly={true} /> 
